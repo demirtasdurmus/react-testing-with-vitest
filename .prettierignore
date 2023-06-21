@@ -5,3 +5,4 @@
 node_modules
 *.yml
 CHANGELOG.md
+.github
