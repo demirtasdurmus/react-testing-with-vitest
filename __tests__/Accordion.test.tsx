@@ -14,7 +14,7 @@ describe('Accordion test', () => {
       </Accordion>
     )
 
-    expect(screen.getByText(/Tedssdsstingggggggggg/i)).toBeDefined()
+    expect(screen.getByText(/Testing/i)).toBeDefined()
   })
   test('Should show title', () => {
     render(
