@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Linting, Testing and Deploying
+name: Linting, Testing, Building and Deploying
 
 # Controls when the workflow will run
 on:
@@ -17,8 +17,8 @@ on:
     ## you may only define one of `paths` and `paths-ignore` for a single event
     # paths:
     #   - "./" # this is the path to the files that will trigger the workflow
-    paths-ignore:
-      - ".github/workflows/*" # this is the path to the files that will be ignored
+    # paths-ignore:
+    #   - ".github/workflows/*" # this is the path to the files that will be ignored
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -59,7 +59,7 @@ jobs:
       - name: Run Tests
         run: npm run test:ci
 
-  Deploying:
+  Building:
     needs: Testing
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -76,5 +76,23 @@ jobs:
       - name: Build Code
         run: npm run build
 
-      - name: Deploy to Firebase
+      - name: Archive Build
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist
+
+  Deploying:
+    needs: Building
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Get Code
+        uses: actions/checkout@v3
+
+      - name: Deploy
         run: echo "Deploying Project"
+
