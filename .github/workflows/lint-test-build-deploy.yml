@@ -150,9 +150,6 @@ jobs:
 
       - name: Use reausable
         uses: ./.github/workflows/reusable.yaml
-        
-        with:
-          file_name: ${{ needs.Building.outputs.output_js_file_name }}
 
       - name: Deploy
         run: echo "Deploying Project"
