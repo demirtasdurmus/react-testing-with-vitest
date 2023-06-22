@@ -14,8 +14,9 @@ on:
       # - develop
       # - hotfix/*  --> hotfix/new hotfix/old
       # - hotfix/** --> hotfix/new/new hotfix/old/old
-    paths:
-      - "./" # this is the path to the files that will trigger the workflow
+    ## you may only define one of `paths` and `paths-ignore` for a single event
+    # paths:
+    #   - "./" # this is the path to the files that will trigger the workflow
     paths-ignore:
       - ".github/workflows/*" # this is the path to the files that will be ignored
 
