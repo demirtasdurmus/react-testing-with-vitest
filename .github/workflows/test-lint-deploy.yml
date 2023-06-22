@@ -5,10 +5,19 @@ name: Linting, Testing and Deploying
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
+    types: [ opened, synchronize, reopened ] # this actions are default
+    branches: [ "main" ]  # this is the target branch
+  push:
+    branches:
+      - main  # this syntax is the same as above
+      # - develop
+      # - hotfix/*  --> hotfix/new hotfix/old
+      # - hotfix/** --> hotfix/new/new hotfix/old/old
+    paths:
+      - "./" # this is the path to the files that will trigger the workflow
+    paths-ignore:
+      - ".github/workflows/*" # this is the path to the files that will be ignored
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
