@@ -64,6 +64,9 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    outputs:
+      output_js_file_name: ${{ steps.PublishJsFileName.outputs.js_file_name }}
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -77,7 +80,8 @@ jobs:
         run: npm run build
 
       - name: Publish Js file name
-        run: find dist/assets/*.js -type f -execdir echo '{}'  ';'
+        id: PublishJsFileName
+        run: find dist/assets/*.js -type f -execdir echo 'js_file_name={}' >> $GITHUB_OUTPUT  ';'
 
       - name: Archive Build
         uses: actions/upload-artifact@v3
@@ -101,6 +105,9 @@ jobs:
 
       - name: Output Build artifacts
         run: ls
+
+      - name: Output values (job outputs)
+        run: echo ${{ needs.Building.outputs.output_js_file_name }}
 
       - name: Deploy
         run: echo "Deploying Project"
