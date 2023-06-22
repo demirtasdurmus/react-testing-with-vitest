@@ -90,8 +90,14 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Get Code
-        uses: actions/checkout@v3
+      - name: Get Build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: dist
+          # path: dist
+
+      - name: Output Build artifacts
+        run: ls
 
       - name: Deploy
         run: echo "Deploying Project"
