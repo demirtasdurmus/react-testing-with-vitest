@@ -15,6 +15,10 @@ jobs:
         exclude:
           - node-version: 14.x
             operating-system: ubuntu-latest
+          - node-version: 14.x
+            operating-system: windows-latest
+          - node-version: 14.x
+            operating-system: macOS-latest
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
