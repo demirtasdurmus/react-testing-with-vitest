@@ -39,7 +39,7 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
-          path: ~/.npm
+          path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
           # key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
@@ -62,12 +62,14 @@ jobs:
 
       - name: Cache dependencies
         uses: actions/cache@v2
+        id: cache-node-modules
         with:
-          path: ~/.npm
+          path: node_modules # caching node_modules folder instead of ~/.npm
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
           # key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install Dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: Run Tests
@@ -89,12 +91,14 @@ jobs:
 
       - name: Cache dependencies
         uses: actions/cache@v2
+        id: cache-node-modules
         with:
-          path: ~/.npm
+          path: node_modules # caching node_modules folder instead of ~/.npm
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
           # key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install Dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: Build Code
