@@ -36,14 +36,26 @@ jobs:
       - name: Get Code
         uses: actions/checkout@v3
 
+      # - name: Cache dependencies
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
+      #     key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      #     # key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+      # - name: Install Dependencies
+      #   run: npm ci
+
       - name: Cache dependencies
         uses: actions/cache@v2
+        id: cache-node-modules
         with:
-          path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: node_modules # caching node_modules folder instead of ~/.npm
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
           # key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install Dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm ci
         
       - name: Lint Code
