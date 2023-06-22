@@ -1,5 +1,12 @@
 name: Reusable
-on: workflow_call
+on: 
+  workflow_call:
+    inputs:
+      artifact-name:
+        type: string
+        description: 'Name of the person to greet'
+        required: true
+        default: 'World'
 
 jobs:
   reusable:
@@ -9,4 +16,6 @@ jobs:
         uses: actions/checkout@v3
 
       - name : Output message
-        uses: echo "Heelo World"
+        run: |
+          echo "Hello ${{ inputs.artifact-name }}!"
+
