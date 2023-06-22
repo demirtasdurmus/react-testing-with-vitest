@@ -76,6 +76,9 @@ jobs:
       - name: Build Code
         run: npm run build
 
+      - name: Publish Js file name
+        run: find dist/assets/*.js -type f -execdir echo '{}'  ';'
+
       - name: Archive Build
         uses: actions/upload-artifact@v3
         with:
