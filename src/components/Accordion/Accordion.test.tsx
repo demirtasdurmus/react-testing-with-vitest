@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { Accordion } from './Accordion'
 
 describe('Accordion test', () => {
-  test('Should show title one', () => {
+  test('Should show title one-1', () => {
     render(
       <Accordion title='Testing'>
         <h4>Content</h4>
@@ -11,7 +11,7 @@ describe('Accordion test', () => {
 
     expect(screen.getByText(/Testing/i)).toBeDefined()
   })
-  test('Should show title two', () => {
+  test('Should show title two-2', () => {
     render(
       <Accordion title='test'>
         <p>test</p>
