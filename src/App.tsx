@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
-import { Accordion } from './components/Accordion'
+import { Accordion } from './components/Accordion/Accordion'
 
 function App() {
   const [count, setCount] = useState(0)

@@ -1,13 +1,9 @@
 import React from 'react'
-import { vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import { Accordion } from '../src/components/Accordion'
-import axios from 'axios'
-
-vi.mock('axios')
+import { Accordion } from './Accordion'
 
 describe('Accordion test', () => {
-  test('Should show title', () => {
+  test('Should show title one', () => {
     render(
       <Accordion title='Testing'>
         <h4>Content</h4>
@@ -16,7 +12,7 @@ describe('Accordion test', () => {
 
     expect(screen.getByText(/Testing/i)).toBeDefined()
   })
-  test('Should show title', () => {
+  test('Should show title two', () => {
     render(
       <Accordion title='test'>
         <p>test</p>
@@ -25,12 +21,5 @@ describe('Accordion test', () => {
     const element = screen.getByRole('heading')
     expect(element).toBeDefined()
     expect(element).toBeInTheDocument()
-  })
-
-  test('mocked axios', async () => {
-    await axios.get('string')
-
-    expect(axios.get).toHaveBeenCalledWith('string')
-    expect(axios.post).toBeDefined()
   })
 })
